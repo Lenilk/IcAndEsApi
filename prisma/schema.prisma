@@ -8,6 +8,7 @@ datasource db {
 }
 
 model users {
+  id       Int    @id @default(autoincrement())
   username String @unique
   password String
   Data     data[]
@@ -24,8 +25,8 @@ model data {
 model note {
   noteId Int    @id @default(autoincrement())
   info   String @db.VarChar(255)
-  amount Int
-  note   String
+  amount Int    @db.Integer
+  note   String @default("")
   type   String
   dateId Int?
   Data   data?  @relation(fields: [dateId], references: [id])

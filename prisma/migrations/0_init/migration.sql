@@ -1,7 +1,10 @@
 -- CreateTable
 CREATE TABLE "users" (
+    "id" SERIAL NOT NULL,
     "username" TEXT NOT NULL,
-    "password" TEXT NOT NULL
+    "password" TEXT NOT NULL,
+
+    CONSTRAINT "users_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -18,7 +21,7 @@ CREATE TABLE "note" (
     "noteId" SERIAL NOT NULL,
     "info" VARCHAR(255) NOT NULL,
     "amount" INTEGER NOT NULL,
-    "note" TEXT NOT NULL,
+    "note" TEXT NOT NULL DEFAULT '',
     "type" TEXT NOT NULL,
     "dateId" INTEGER,
 
