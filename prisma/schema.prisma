@@ -7,26 +7,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model user {
+model users {
   username String @unique
   password String
   Data     data[]
 }
 
 model data {
-  Date String  @unique
+  Date String
   id   Int     @id @default(autoincrement())
   Note note[]
-  User user?   @relation(fields: [user], references: [username])
+  User users?  @relation(fields: [user], references: [username])
   user String?
 }
 
 model note {
-  noteId   Int     @id
-  info     String  @db.VarChar(255)
-  amount   Int
-  note     String
-  type     String
-  noteDate String?
-  Data     data?   @relation(fields: [noteDate], references: [Date])
+  noteId Int    @id @default(autoincrement())
+  info   String @db.VarChar(255)
+  amount Int
+  note   String
+  type   String
+  dateId Int?
+  Data   data?  @relation(fields: [dateId], references: [id])
 }

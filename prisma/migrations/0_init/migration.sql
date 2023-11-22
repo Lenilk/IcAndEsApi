@@ -1,5 +1,5 @@
 -- CreateTable
-CREATE TABLE "user" (
+CREATE TABLE "users" (
     "username" TEXT NOT NULL,
     "password" TEXT NOT NULL
 );
@@ -15,25 +15,22 @@ CREATE TABLE "data" (
 
 -- CreateTable
 CREATE TABLE "note" (
-    "noteId" INTEGER NOT NULL,
+    "noteId" SERIAL NOT NULL,
     "info" VARCHAR(255) NOT NULL,
     "amount" INTEGER NOT NULL,
     "note" TEXT NOT NULL,
     "type" TEXT NOT NULL,
-    "noteDate" TEXT,
+    "dateId" INTEGER,
 
     CONSTRAINT "note_pkey" PRIMARY KEY ("noteId")
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "user_username_key" ON "user"("username");
-
--- CreateIndex
-CREATE UNIQUE INDEX "data_Date_key" ON "data"("Date");
+CREATE UNIQUE INDEX "users_username_key" ON "users"("username");
 
 -- AddForeignKey
-ALTER TABLE "data" ADD CONSTRAINT "data_user_fkey" FOREIGN KEY ("user") REFERENCES "user"("username") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "data" ADD CONSTRAINT "data_user_fkey" FOREIGN KEY ("user") REFERENCES "users"("username") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "note" ADD CONSTRAINT "note_noteDate_fkey" FOREIGN KEY ("noteDate") REFERENCES "data"("Date") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "note" ADD CONSTRAINT "note_dateId_fkey" FOREIGN KEY ("dateId") REFERENCES "data"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
