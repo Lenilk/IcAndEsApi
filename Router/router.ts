@@ -5,10 +5,11 @@ import * as users from "./Routes/users";
 const router = express.Router();
 
 router.get("/users", users.getUsers);
-router.get("/createUser", users.createUser);
+router.post("/createUser", users.createUser);
 router.get("/data", data.getData);
-router.get("/postData", data.postData);
-router.get("/deleteData", data.deleteData);
-router.get("/deleteNote", note.deleteNote);
-router.get("/postNote", note.postNote);
+router.post("/postData", data.postData);
+router.delete("/deleteData", data.deleteData);
+router.delete("/deleteNote", note.deleteNote);
+router.post("/postNote", note.postNote);
+
 export = router;
