@@ -2,7 +2,7 @@ import { PrismaClient, Prisma } from "@prisma/client";
 import { Request, Response } from "express";
 const prisma = new PrismaClient();
 
-//('postNote')
+//('/postNote')
 export const postNote = async (req: Request, res: Response) => {
   const user = req.body.user;
   const id = req.body.dateId;
@@ -20,8 +20,9 @@ export const postNote = async (req: Request, res: Response) => {
       },
     },
   });
+  res.json(result);
 };
-//('deleteNote')
+//('/deleteNote')
 export const deleteNote = async (req: Request, res: Response) => {
   const noteId = req.body.noteId;
   const dateId = req.body.dateId;

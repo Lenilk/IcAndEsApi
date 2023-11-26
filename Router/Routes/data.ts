@@ -32,7 +32,7 @@ export const postData = async (req: Request, res: Response) => {
       },
     },
     include: {
-      Data: true,
+      Data: { include: { Note: true } },
     },
   });
   res.json(post);
