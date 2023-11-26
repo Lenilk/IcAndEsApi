@@ -16,9 +16,9 @@ router.post("/postData", data.postData);
 router.delete("/deleteData", data.deleteData);
 
 // Route of note
+router.get("/getAllNote", note.getAllNote);
 router.post("/postNote", note.postNote);
 router.delete("/deleteNote", note.deleteNote);
-router.put("/updateNote",note.updateNote);
-
+router.put("/updateNote", note.updateNote);
 
 export = router;

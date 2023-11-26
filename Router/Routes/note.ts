@@ -48,3 +48,8 @@ export const updateNote = async (req: Request, res: Response) => {
   const result = prisma.note.update({ where: whereNote, data: updateNote });
   res.json(result);
 };
+
+export const getAllNote = async (req: Request, res: Response) => {
+  const result = await prisma.note.findMany({});
+  res.json(result);
+};
