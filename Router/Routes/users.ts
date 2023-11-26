@@ -1,5 +1,6 @@
 import { PrismaClient, Prisma } from "@prisma/client";
 import { Request, Response } from "express";
+import { errors } from "undici-types";
 const prisma = new PrismaClient();
 
 // ('/users')
@@ -36,4 +37,24 @@ export const changePassword = async (req: Request, res: Response) => {
         })
       : null;
   res.json(result);
+};
+
+export const changeUsername = async (req: Request, res: Response) => {
+  const oldUsername = req.body.oldUsername;
+  const newUsername = req.body.newUsername;
+  const whereUser = Prisma.validator<Prisma.usersWhereUniqueInput>()({
+    username: oldUsername,
+  });
+  const updateUsers = Prisma.validator<Prisma.usersUpdateInput>()({
+    username: newUsername,
+  });
+  try {
+    const result = await prisma.users.update({
+      where: whereUser,
+      data: updateUsers,
+    });
+    res.json(result);
+  } catch (e) {
+    throw e;
+  }
 };

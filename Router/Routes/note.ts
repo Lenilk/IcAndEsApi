@@ -19,6 +19,7 @@ export const postNote = async (req: Request, res: Response) => {
         },
       },
     },
+    include: { Note: true },
   });
   res.json(result);
 };
@@ -29,5 +30,21 @@ export const deleteNote = async (req: Request, res: Response) => {
   const result = await prisma.note.delete({
     where: { noteId: noteId, dateId: dateId },
   });
+  res.json(result);
+};
+
+export const updateNote = async (req: Request, res: Response) => {
+  const noteId = req.body.noteId;
+  const note = req.body.Note;
+  const whereNote = Prisma.validator<Prisma.noteWhereUniqueInput>()({
+    noteId: noteId,
+  });
+  const updateNote = Prisma.validator<Prisma.noteUpdateInput>()({
+    info: note.info,
+    amount: note.amount,
+    note: note.note,
+    type: note.type,
+  });
+  const result = prisma.note.update({ where: whereNote, data: updateNote });
   res.json(result);
 };
